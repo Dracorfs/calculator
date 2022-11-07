@@ -18,41 +18,54 @@ export const Calculator = () => {
     const createHandleClick = op => () => setValue(value.concat(op))
 
     return (
-        <div className='bg-gray-500 grid place-items-center min-h-screen'>
-            <h1 className='text-3xl font-bold'>Calculator.</h1>
-            <input value={value} readOnly className='rounded-md'/>
-            <div role="grid" className='bg-black text-white rounded-md p-8'>
-                {rows.map((row, idx) => (
-                    <div key={idx} role='row'>
-                        {row.map( number =>
-                            <button
-                                onClick={ createHandleClick(number) }
-                                key={ number }
-                                className='bg-gray-600 border-none rounded px-4 py-2 m-2'
-                            >
-                                { number }
-                            </button>
-                        )}
+        <div className='grid place-items-center bg-gray-500 min-h-screen'>
+            <header className='block w-auto'>
+                <h1 className='text-3xl font-serif font-bold'>Calculator.</h1>
+            </header>
+            <section className='grid place-items-center bg-gray-400 rounded-xl p-10'>
+                <input value={value} readOnly className='text-gray-900 italic bg-gray-300 rounded-md w-full h-14 mb-4 py-4 px-8 outline-none'/>
+                <div role="grid" className='bg-gray-300 text-white rounded-md p-5'>
+                    <div className='flex'>
+                        <div className='grid vertical-align'>
+                            {rows.map((row, idx) => (
+                                <div key={idx} role='row'>
+                                    {row.map( number =>
+                                        <button
+                                            onClick={ createHandleClick(number) }
+                                            key={ number }
+                                            className='bg-gray-600 border-none rounded px-4 py-2 m-2'
+                                        >
+                                            { number }
+                                        </button>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                        <div className='grid vertical-align'>
+                            {
+                                operations.map(operation => (
+                                    <button
+                                        onClick={ createHandleClick(operation) }
+                                        key={operation}
+                                        className='bg-gray-600 border-none rounded px-4 py-2 m-2'
+                                    >
+                                        {operation}
+                                    </button>
+                                ))
+                            }
+                        </div>
                     </div>
-                ))}
-                {
-                    operations.map(operation => (
-                        <button
-                            onClick={ createHandleClick(operation) }
-                            key={operation}
-                            className='bg-gray-600 border-none rounded px-4 py-2 m-2'
-                        >
-                            {operation}
-                        </button>
-                    ))
-                }
-                <button
-                    onClick={ () => setValue(evaluate(value))}
-                    className='bg-gray-600 border-none rounded px-4 py-2 m-2'
-                >
-                    {equalSign}
-                </button>
-            </div>
+                    <button
+                        onClick={ () => setValue(evaluate(value))}
+                        className='bg-gray-600 border-none rounded px-4 py-2 m-2 w-full'
+                    >
+                        {equalSign}
+                    </button>
+                </div>
+            </section>
+            <footer className='text-3xl font-serif font-bold'>
+                Sober style.
+            </footer>
         </div>
     )
 }
