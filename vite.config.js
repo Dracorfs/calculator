@@ -5,5 +5,6 @@ export default defineConfig({
     plugins: [react()],
     test: { // config de vitest
         environment: 'happy-dom'
-    }
+    },
+    base: '/calculator/'
 })
